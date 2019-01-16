@@ -42,12 +42,12 @@ Check what the adress is like, for example, 127.0.0.1:5000
 ```deactivate```
 
 ## Use cURL to send HTTTP requests(your address may be different):
-```curl --request GET http://127.0.0.1:5000/user/Jade```
+Retrieve: ```curl --request GET http://127.0.0.1:5000/user/Jade```
 
-```curl --request POST http://127.0.0.1:5000/user/Jade```
+Add(the same name): ```curl --request POST http://127.0.0.1:5000/user/Jade```
 
-```curl --request POST http://127.0.0.1:5000/user/Janny?age=19&occupation=Student```
+Add: ```curl --request POST http://127.0.0.1:5000/user/Janny -d "age=19&occupation=Student"```
 
-```curl --request POST http://127.0.0.1:5000/user/Janny?age=19&occupation=Developer```
+Update: ```curl --request PUT http://127.0.0.1:5000/user/Janny -d "age=20&occupation=Developer"```
 
-```curl --request DELETE http://127.0.0.1:5000/user/Janny```
+Delete: ```curl --request DELETE http://127.0.0.1:5000/user/Janny```
