@@ -59,7 +59,7 @@ class User(Resource):
         for user in users:
             if(name == user["name"]):
                 user["age"] = args["age"]
-                user["occupation"] = args["occupationb"]
+                user["occupation"] = args["occupation"]
                 return user, 200
 
         user = {
