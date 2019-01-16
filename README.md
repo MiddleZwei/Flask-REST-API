@@ -41,7 +41,7 @@ Check what the adress is like, for example, 127.0.0.1:5000
 ### When you are done with requests below, deactivate the environment:
 ```deactivate```
 
-## Use cURL to send HTTTP requests(your address may be different):
+## Use cURL to send HTTP requests(your address may be different):
 Retrieve: ```curl --request GET http://127.0.0.1:5000/user/Jade```
 
 Add(the same name): ```curl --request POST http://127.0.0.1:5000/user/Jade```
