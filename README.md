@@ -1,3 +1,5 @@
+## Awaiting for updates due to project redesign
+
 # Flask-REST-API
 REST API using Python and Flask Framework
 
