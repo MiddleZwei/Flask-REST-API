@@ -4,6 +4,8 @@ from . import db
 
 from . import bcrypt
 
+from .BlogpostModel import BlogpostSchema
+
 
 class UserModel(db.model):
     # table name
@@ -23,6 +25,7 @@ class UserModel(db.model):
         self.email = data.get('email')
         self.created_at = datetime.datetime.utcnow()
         self.modified_at = datetime.datetime.utcnow()
+        blogposts = db.relationship('BlogpostModel', backref='users', lazy=True)
 
     def save(self):
         db.session.add(self)
@@ -57,5 +60,14 @@ class UserModel(db.model):
     def check_hash(self, password):
         return bcrypt.check_password_hash(self.password, password)
 
+
+class UserSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str(required=True)
+    email = fields.Email(required=True)
+    password = fields.Str(required=True)
+    created_at = fields.DateTime(dump_only=True)
+    modified_at = fields.DateTime(dump_only=True)
+    blogposts = fields.Nested(BlogpostSchema, many=True)
 
 
