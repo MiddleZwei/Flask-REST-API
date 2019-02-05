@@ -1,12 +1,20 @@
 from flask import Flask
 
 from .config import app_config
+from .models import bcrypt, db
 
 def create_app(env_name):
+
     # app init
     app = Flask(__name__)
-
     app.config.from_object(app_config[env_name])
+    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # bcrypt init
+    bcrypt.init_app(app)
+
+    # db init
+    db.init_app(app)
 
     @app.route('/', methods=['GET'])
     def index():

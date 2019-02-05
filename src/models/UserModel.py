@@ -7,7 +7,7 @@ from . import bcrypt
 from .BlogpostModel import BlogpostSchema
 
 
-class UserModel(db.model):
+class UserModel(db.Model):
     # table name
     __tablename__ = 'users'
 
