@@ -1,10 +1,11 @@
 # Flask-REST-API
 REST API using Python, Flask Framework and PostgreSQL 11 on Windows 10
+
 SQLAlchemy is used as ORM
+
 So far only users are available. Blogposts are yet to come.
 
 ## Entity diagram:
-image to be uploaded
 
 
 ## How to use the app:
@@ -30,7 +31,7 @@ Host is most likely be localhost for you.
 
 The secret key may be whatever you wish.
 
-The most problems I had during this stage, for further questions refer to the official documentation.
+A lot of problems I had during this stage, for further solutions for your specific cases refer to the official documentation.
 
 Windows
 ```
@@ -46,7 +47,7 @@ export JWT_SECRET_KEY=hhgaghhgsdhdhdd
 ```
 
 ### Database:
-Initialize, create migrations and apply to the database
+Initialize, create migrations and apply
 ```
 python manage.py db init
 python manage.py db migrate
@@ -63,18 +64,22 @@ You should see "users" and "blogposts" tables
 
 ### Run the application
 ```python manage.py runserver {custom port number if needed}```
+
 The default port is 5000. Check by going to http://127.0.0.1:5000/
+
 You should see a congratulation message
 
 The start point of the API is http://127.0.0.1:5000/api/v1/users/
+
 But to access it, you'll have to provide your credentials(POST request): email, password and name.
+
 See below:
 
 ## Using POSTMAN:
 Content-Type:
 ``` application/json ```
 
-##### Create User 
+#### Create User 
 POST http://127.0.0.1:5000/api/v1/users
 
 Body
@@ -97,18 +102,18 @@ POST http://127.0.0.1:5000/api/v1/users/login
 
 Keep the jwt_token, you'll need it later!
 
-##### Get A User Info 
+#### Get A User Info 
 GET http://127.0.0.1:5000/api/v1/users/\<user_id>
 
-##### Get All users 
+#### Get All users 
 GET http://127.0.0.1:5000/api/v1/users
 
-##### Get My Info
+#### Get My Info
 GET http://127.0.0.1:5000/api/v1/users/me
 
 In the request header put the token you saved as ```api-token```
 
-##### Edit My Info
+#### Edit My Info
 PUT http://127.0.0.1:5000/api/v1/users/me
 
 In the request header put the token you saved as ```api-token```
