@@ -6,6 +6,8 @@ SQLAlchemy is used as ORM
 
 So far only users are available. Blogposts are yet to come.
 
+TODO: blogposts and tests
+
 # Entity diagram:
 ![Entities](https://gist.github.com/MiddleZwei/1525d33d3b9a0dc48503300b07dd82fc/raw/71bca97bc7d4297de8e920354cfc80e2ee568dee/entity_diagram.png)
 
