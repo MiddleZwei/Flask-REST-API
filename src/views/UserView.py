@@ -8,7 +8,8 @@ user_schema = UserSchema()
 
 @user_api.route('/', methods=['POST'])
 def create():
-    # create a user
+    # create a user function
+
     req_data = request.get_json()
     data, error = user_schema.load(req_data)
 

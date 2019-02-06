@@ -1,4 +1,4 @@
-jwt
+PyJWT
 aniso8601==4.1.0
 Click==7.0
 Flask==1.0.2

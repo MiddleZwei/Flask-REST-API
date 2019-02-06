@@ -21,7 +21,7 @@ class UserModel(db.Model):
     # class constructor
     def __init__(self, data):
         self.name = data.get('name')
-        self.password = self.__generarte_hash(data.get('password'))
+        self.password = self.__generate_hash(data.get('password'))
         self.email = data.get('email')
         self.created_at = datetime.datetime.utcnow()
         self.modified_at = datetime.datetime.utcnow()
@@ -51,14 +51,18 @@ class UserModel(db.Model):
     def get_one_user(id):
         return UserModel.query.get(id)
 
-    def __repr__(self):
-        return '<id {}>'.format(self.id)
+    @staticmethod
+    def get_user_by_email(email):
+        return UserModel.query.filter_by(email=email).first()
 
     def __generate_hash(self, password):
         return bcrypt.generate_password_hash(password, rounds=10).decode("utf-8")
 
     def check_hash(self, password):
         return bcrypt.check_password_hash(self.password, password)
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
 
 
 class UserSchema(Schema):
