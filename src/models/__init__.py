@@ -6,4 +6,3 @@ db = SQLAlchemy()
 
 #
 bcrypt = Bcrypt()
-
