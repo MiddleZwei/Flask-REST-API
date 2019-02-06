@@ -1,55 +1,130 @@
-## Awaiting for updates due to project redesign
-
 # Flask-REST-API
-REST API using Python and Flask Framework
+REST API using Python, Flask Framework and PostgreSQL 11 on Windows 10
+SQLAlchemy is used as ORM
+So far only users are available. Blogposts are yet to come.
 
-## The built-in user dataset looks like the following:
-```python
-users = [
-    {
-        "name": "Jade",
-        "age": 42,
-        "occupation": "Network Engineer"
-    },
-    {
-        "name": "Josh",
-        "age": 21,
-        "occupation": "Sales Manager"
-    },
-    {
-        "name": "Agata",
-        "age": 25,
-        "occupation": "CEO"
-    }
-]
-```
+## Entity diagram:
+image to be uploaded
 
 
 ## How to use the app:
 
-### Install and activate the virtual environment with Python 3(tested on Fedora 29 only):
+### Install and activate the virtual environment with Python 3.6:
+#### Run the following
 ```
-virtualenv venv --python=`which python3`
-source venv/bin/activate
+virtualenv venv --python=3.6
+cd venv/Scripts
+activate
 ```
+#### Or, if using PyCharm, go to File > Settings > Project Interpreter > create your environment here
 
 ### Install dependencies:
 ```pip install -r requirements.txt```
 
+### Set the environment variables
+5432 is the default port set up bduring the PostgreSQL installation. 
+
+It can be found and changed in the PostgreSQL/11/data/postgresql.conf
+
+Host is most likely be localhost for you.
+
+The secret key may be whatever you wish.
+
+The most problems I had during this stage, for further questions refer to the official documentation.
+
+Windows
+```
+SET FLASK_ENV=development
+SET DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<name_of_your_database>
+SET JWT_SECRET_KEY=hhgaghhgsdhdhdd
+```
+Linux(tested on Windows only, though)
+```
+export FLASK_ENV=development
+export DATABASE_URL=postgres://username:password@localhost:5432/<name_of_your_database>
+export JWT_SECRET_KEY=hhgaghhgsdhdhdd
+```
+
+### Database:
+Initialize, create migrations and apply to the database
+```
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
+```
+Check if everything is good:
+```
+psql {U- otheruser}
+# \connect db_name
+# \dt
+```
+You should see "users" and "blogposts" tables
+
+
 ### Run the application
-```python app.py```
-Check what the adress is like, for example, 127.0.0.1:5000
+```python manage.py runserver {custom port number if needed}```
+The default port is 5000. Check by going to http://127.0.0.1:5000/
+You should see a congratulation message
 
-### When you are done with requests below, deactivate the environment:
+The start point of the API is http://127.0.0.1:5000/api/v1/users/
+But to access it, you'll have to provide your credentials(POST request): email, password and name.
+See below:
+
+## Using POSTMAN:
+Content-Type:
+``` application/json ```
+
+##### Create User 
+POST http://127.0.0.1:5000/api/v1/users
+
+Body
+```
+{
+	"email": "email@gmail.comm",
+	"password": "password123",
+	"name": "Jessy Pane"
+}
+```
+
+##### Login User 
+POST http://127.0.0.1:5000/api/v1/users/login
+```
+{
+	"email": "email@gmail.comm",
+	"password": "password123"
+}
+```
+
+Keep the jwt_token, you'll need it later!
+
+##### Get A User Info 
+GET http://127.0.0.1:5000/api/v1/users/\<user_id>
+
+##### Get All users 
+GET http://127.0.0.1:5000/api/v1/users
+
+##### Get My Info
+GET http://127.0.0.1:5000/api/v1/users/me
+
+In the request header put the token you saved as ```api-token```
+
+##### Edit My Info
+PUT http://127.0.0.1:5000/api/v1/users/me
+
+In the request header put the token you saved as ```api-token```
+
+Body: 
+```
+{        
+    "name": "updated name"
+}
+```
+
+##### DELETE My Account
+DELETE http://127.0.0.1:5000/api/v1/users/me
+
+In the request header put the token you saved as ```api-token```
+
+
+### In order to deactivate the virtual environment, just type this in:
 ```deactivate```
-
-## Use cURL to send HTTP requests(your address may be different):
-Retrieve: ```curl --request GET http://127.0.0.1:5000/user/Jade```
-
-Add(the same name): ```curl --request POST http://127.0.0.1:5000/user/Jade```
-
-Add: ```curl --request POST http://127.0.0.1:5000/user/Janny -d "age=19&occupation=Student"```
-
-Update: ```curl --request PUT http://127.0.0.1:5000/user/Janny -d "age=20&occupation=Developer"```
-
-Delete: ```curl --request DELETE http://127.0.0.1:5000/user/Janny```
