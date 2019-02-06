@@ -1,28 +1,31 @@
-# Flask-REST-API
+# REST API with Flask
+
 REST API using Python, Flask Framework and PostgreSQL 11 on Windows 10
 
 SQLAlchemy is used as ORM
 
 So far only users are available. Blogposts are yet to come.
 
-## Entity diagram:
+# Entity diagram:
 ![Entities](https://gist.github.com/MiddleZwei/1525d33d3b9a0dc48503300b07dd82fc/raw/71bca97bc7d4297de8e920354cfc80e2ee568dee/entity_diagram.png)
 
-## How to use the app:
+# How to use the app:
 
-### Install and activate the virtual environment with Python 3.6:
-#### Run the following
+## Install and activate the virtual environment with Python 3.6:
+
+Run the following
 ```
 virtualenv venv --python=3.6
 cd venv/Scripts
 activate
 ```
-#### Or, if using PyCharm, go to File > Settings > Project Interpreter > create your environment here
 
-### Install dependencies:
+Or, if using PyCharm, go to File > Settings > Project Interpreter > create your environment here
+
+## Install dependencies:
 ```pip install -r requirements.txt```
 
-### Set the environment variables
+## Set the environment variables
 5432 is the default port set up bduring the PostgreSQL installation. 
 
 It can be found and changed in the PostgreSQL/11/data/postgresql.conf
@@ -42,11 +45,11 @@ SET JWT_SECRET_KEY=hhgaghhgsdhdhdd
 Linux(tested on Windows only, though)
 ```
 export FLASK_ENV=development
-export DATABASE_URL=postgres://username:password@localhost:5432/<name_of_your_database>
+export DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<name_of_your_database>
 export JWT_SECRET_KEY=hhgaghhgsdhdhdd
 ```
 
-### Database:
+## Database:
 Initialize, create migrations and apply
 ```
 python manage.py db init
@@ -62,7 +65,7 @@ psql {U- otheruser}
 You should see "users" and "blogposts" tables
 
 
-### Run the application
+## Run the application
 ```python manage.py runserver {custom port number if needed}```
 
 The default port is 5000. Check by going to http://127.0.0.1:5000/
@@ -75,11 +78,11 @@ But to access it, you'll have to provide your credentials(POST request): email, 
 
 See below:
 
-## Using POSTMAN:
+## Requests(I used Postman):
 Content-Type:
 ``` application/json ```
 
-#### Create User 
+### Create User 
 POST http://127.0.0.1:5000/api/v1/users
 
 Body
@@ -91,7 +94,7 @@ Body
 }
 ```
 
-##### Login User 
+### Login User 
 POST http://127.0.0.1:5000/api/v1/users/login
 ```
 {
@@ -102,18 +105,18 @@ POST http://127.0.0.1:5000/api/v1/users/login
 
 Keep the jwt_token, you'll need it later!
 
-#### Get A User Info 
-GET http://127.0.0.1:5000/api/v1/users/\<user_id>
+### Get A User Info 
+GET http://127.0.0.1:5000/api/v1/users/<user_id>
 
-#### Get All users 
+### Get All users 
 GET http://127.0.0.1:5000/api/v1/users
 
-#### Get My Info
+### Get My Info
 GET http://127.0.0.1:5000/api/v1/users/me
 
 In the request header put the token you saved as ```api-token```
 
-#### Edit My Info
+### Edit My Info
 PUT http://127.0.0.1:5000/api/v1/users/me
 
 In the request header put the token you saved as ```api-token```
@@ -125,11 +128,11 @@ Body:
 }
 ```
 
-##### DELETE My Account
+### DELETE My Account
 DELETE http://127.0.0.1:5000/api/v1/users/me
 
 In the request header put the token you saved as ```api-token```
 
 
-### In order to deactivate the virtual environment, just type this in:
+## In order to deactivate the virtual environment, just type this in:
 ```deactivate```
