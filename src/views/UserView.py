@@ -1,4 +1,6 @@
 from flask import request, json, Response, Blueprint, g
+
+from src.shared.funs import response
 from ..models.UserModel import UserModel, UserSchema
 from ..shared.Authentication import Auth
 
@@ -121,11 +123,3 @@ def get_my_data():
 
     return response(serialized_user, 200)
 
-
-def response(res, status_code):
-    # response function
-    return Response(
-        mimetype="application/json",
-        response=json.dumps(res),
-        status=status_code
-    )
