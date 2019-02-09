@@ -6,6 +6,7 @@ from .models import bcrypt, db
 from .views.UserView import user_api as user_blueprint
 from .views.BlogpostView import blogpost_api as blogpost_blueprint
 
+
 def create_app(env_name):
     # app init
     app = Flask(__name__)

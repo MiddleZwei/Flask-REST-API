@@ -31,6 +31,7 @@ def create():
     serialized_data = user_schema.dump(user).data
 
     token = Auth.generate_token(serialized_data.get('id'))
+    # print(token)
 
     return response({'jwt_token': token}, 201)
 

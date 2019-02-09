@@ -20,7 +20,7 @@ class Auth:
             return jwt.encode(
                 payload,
                 os.getenv('JWT_SECRET_KEY'),
-                'HS256'
+                algorithm='HS256'
             ).decode("utf-8")
         except Exception as e:
             return Response(
