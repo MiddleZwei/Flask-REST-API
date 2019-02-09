@@ -4,9 +4,7 @@ REST API using Python, Flask Framework and PostgreSQL 11 on Windows 10
 
 SQLAlchemy is used as ORM
 
-So far only users are available. Blogposts are yet to come.
-
-TODO: blogposts and tests
+Three modes: Production, Development, Testing
 
 # Entity diagram:
 ![Entities](https://gist.github.com/MiddleZwei/1525d33d3b9a0dc48503300b07dd82fc/raw/71bca97bc7d4297de8e920354cfc80e2ee568dee/entity_diagram.png)
@@ -132,6 +130,46 @@ Body:
 
 ### DELETE My Account
 DELETE http://127.0.0.1:5000/api/v1/users/me
+
+In the request header put the token you saved as ```api-token```
+
+<hr>
+
+### Create Blogpost 
+POST http://127.0.0.1:5000/api/v1/blogposts
+
+In the request header put the token you saved as ```api-token```
+
+Body
+```
+{
+	"title": "test",
+	"contents": "test"
+}
+```
+
+### Get all Blogposts
+GET http://127.0.0.1:5000/api/v1/blogposts
+
+
+### Get a Blogpost by id
+GET http://127.0.0.1:5000/api/v1/blogposts/<blogpost_id>
+
+### Update Blogpost
+PUT http://127.0.0.1:5000/api/v1/blogposts/1
+
+In the request header put the token you saved as ```api-token```
+
+Body
+```
+{
+	"title": "updated",
+	"contents": "updated"
+}
+```
+
+### Delete Blogpost
+PUT http://127.0.0.1:5000/api/v1/blogposts/1
 
 In the request header put the token you saved as ```api-token```
 
