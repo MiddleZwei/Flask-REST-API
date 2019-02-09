@@ -24,7 +24,7 @@ def create():
 
     data = blogpost_schema.dump(post).data
 
-    return response(data, 200)
+    return response(data, 201)
 
 
 @blogpost_api.route('/', methods=['GET'])
@@ -36,7 +36,7 @@ def get_all_blogposts():
 
 
 @blogpost_api.route('/<int:blogpost_id>', methods=['GET'])
-@Auth.auth_required
+# @Auth.auth_required
 def get_blogpost(blogpost_id):
     blogpost = BlogpostModel.get_one_blogpost(blogpost_id)
 
